@@ -39,14 +39,25 @@ class TasksController < ApplicationController
     end
   end
 
+  #def task_logger
+    #@task_logger ||= Logger.new( 'log/task.log', 'daily')
+  #end
+
+  #task_logger.debug 'taskのログを出力'
+
+　def confirm_new
+    @task = current_user.tasks.new(task_params)
+    render :new unless @task.valid?
+  end
+
+
   private
 
   def task_params
     params.require(:task).permit(:name, :description)
   end
 
+
   def set_task
     @task = current_user.tasks.find(params[:id])
   end
-
-end

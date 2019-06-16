@@ -65,4 +65,4 @@ gem 'bcrypt', '3.1.11'
 gem 'rails_autolink'
 
 gem 'rspec-rails' , '~> 3.7'
-gem 'chromedriver-helper'
+#gem 'chromedriver-helper'
