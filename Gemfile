@@ -66,3 +66,6 @@ gem 'rails_autolink'
 
 gem 'rspec-rails' , '~> 3.7'
 #gem 'chromedriver-helper'
+
+#検索機能の追加
+gem 'ransack'

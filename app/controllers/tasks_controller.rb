@@ -2,7 +2,9 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = current_user.tasks
+    #@tasks = current_user.tasks
+    @q = current_user.tasks.ransack(params[:q])
+    @tasks = @q.result(distinct: ture).recent
   end
 
   def show
@@ -30,7 +32,12 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params.merge(user_id: current_user.id))
+    @task = current_ser.tasks.new(task_params)
+    if params [:back].present?
+      render :new
+      retrun
+    end
+    #@task = Task.new(task_params.merge(user_id: current_user.id))
 
     if @task.save
       redirect_to @task, notice: "タスク『#(@task.name)」を登録しました。"
